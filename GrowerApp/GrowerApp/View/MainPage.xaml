@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:GrowerApp.View"
+             x:Class="GrowerApp.View.MainPage"
+             BackgroundColor="White"
+             BindingContext="{Binding MainPageViewModel, Source={StaticResource Locator}}">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="90" />
+                <RowDefinition />
+                <RowDefinition Height="70" />
+            </Grid.RowDefinitions>
+
+            <Grid Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="1" Text="Producer Knowledge Store" TextColor="Black" FontSize="22" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                <Grid Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition />
+                        <ColumnDefinition  Width="30"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" WidthRequest="30" Image="previous.png" BackgroundColor="White" BorderWidth="0" BorderColor="White" />
+                    <Label Grid.Column="1" Text="News" TextColor="Black" FontSize="18" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                    <Button Grid.Column="2" WidthRequest="30" Image="next.png" BackgroundColor="White" BorderWidth="0" BorderColor="White"/>
+                    <!--<Image Source="previous.png" Grid.Column="0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer>
+
+                            </TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>-->
+<!--                    <Image Source="next.png" Grid.Column="2">-->
+<!--                        <Image.GestureRecognizers>-->
+<!--                            <TapGestureRecognizer>-->
+<!---->
+<!--                            </TapGestureRecognizer>-->
+<!--                        </Image.GestureRecognizers>-->
+<!--                    </Image>-->
+                </Grid>
+            </Grid>
+
+            <ContentView Grid.Row="1" BackgroundColor="Red">
+                <!--<ContentView.Content>
+                    <views:View1 />
+                </ContentView.Content>-->
+            </ContentView>
+
+            <StackLayout Grid.Row="2" Orientation="Horizontal" BackgroundColor="White">
+                <Button Text="News" WidthRequest="70" FontSize="10" BackgroundColor="White" />
+                <Button Text="Weather" WidthRequest="70" FontSize="10" BackgroundColor="White"/>
+                <Button Text="Commodity" WidthRequest="70" FontSize="10" BackgroundColor="White"/>
+                <Button Text="Product" WidthRequest="70" FontSize="10" BackgroundColor="White"/>
+                <Button Text="Relationship" WidthRequest="70" FontSize="10" BackgroundColor="White"/>
+            </StackLayout>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

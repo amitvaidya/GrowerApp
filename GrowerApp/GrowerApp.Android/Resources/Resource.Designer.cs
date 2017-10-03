@@ -2201,7 +2201,16 @@ namespace GrowerApp.Droid
 			public const int mr_ic_play_light = 2130837664;
 			
 			// aapt resource value: 0x7f0200a1
-			public const int notification_template_icon_bg = 2130837665;
+			public const int next = 2130837665;
+			
+			// aapt resource value: 0x7f0200a4
+			public const int notification_template_icon_bg = 2130837668;
+			
+			// aapt resource value: 0x7f0200a2
+			public const int previous = 2130837666;
+			
+			// aapt resource value: 0x7f0200a3
+			public const int splash = 2130837667;
 			
 			static Drawable()
 			{
@@ -3870,6 +3879,9 @@ namespace GrowerApp.Droid
 			
 			// aapt resource value: 0x7f0a0003
 			public const int Theme_MediaRouter_LightControlPanel = 2131361795;
+			
+			// aapt resource value: 0x7f0a0175
+			public const int Theme_Splash = 2131362165;
 			
 			// aapt resource value: 0x7f0a010e
 			public const int ThemeOverlay_AppCompat = 2131362062;
