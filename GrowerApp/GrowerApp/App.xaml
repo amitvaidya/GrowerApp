@@ -6,7 +6,7 @@
   <Application.Resources>
     <!-- Application resource dictionary -->
     <forms:ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-      <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" 
+      <vm:IocContainer x:Key="Locator" d:IsDataSource="True" 
                            xmlns:vm="clr-namespace:GrowerApp.ViewModel" />
     </forms:ResourceDictionary>
   </Application.Resources>

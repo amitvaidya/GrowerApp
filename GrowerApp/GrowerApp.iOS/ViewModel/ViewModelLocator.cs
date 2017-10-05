@@ -25,7 +25,7 @@ namespace GrowerApp.iOS.ViewModel
     public class ViewModelLocator
     {
         /// <summary>
-        /// Initializes a new instance of the ViewModelLocator class.
+        /// Initializes a new instance of the IocContainer class.
         /// </summary>
         public ViewModelLocator()
         {

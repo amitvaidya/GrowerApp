@@ -14,7 +14,10 @@
 
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using GrowerApp.Interfaces;
+using GrowerApp.Services;
 using Microsoft.Practices.ServiceLocation;
+using Xamarin.Forms;
 
 namespace GrowerApp.ViewModel
 {
@@ -22,12 +25,12 @@ namespace GrowerApp.ViewModel
     /// This class contains static references to all the view models in the
     /// application and provides an entry point for the bindings.
     /// </summary>
-    public class ViewModelLocator
+    public class IocContainer
     {
         /// <summary>
-        /// Initializes a new instance of the ViewModelLocator class.
+        /// Initializes a new instance of the IocContainer class.
         /// </summary>
-        public ViewModelLocator()
+        public IocContainer()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
@@ -42,9 +45,21 @@ namespace GrowerApp.ViewModel
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
-            SimpleIoc.Default.Register<MainPageViewModel>();
         }
 
+        public static SimpleIoc Container => SimpleIoc.Default;
+
+        public static void CreateContainer()
+        {
+            //Register your dependencies here...
+            SimpleIoc.Default.Register(() => DependencyService.Get<IDbOperations>());
+            SimpleIoc.Default.Register<IDbSchemaService, DbSchemaService>();
+            SimpleIoc.Default.Register<MainPageViewModel>();
+
+        }
+
+        //Properties for the view to bind with ViewModel
+        //TODO: needs refactoration
         public MainPageViewModel MainPageViewModel
         {
             get
@@ -52,7 +67,7 @@ namespace GrowerApp.ViewModel
                 return ServiceLocator.Current.GetInstance<MainPageViewModel>();
             }
         }
-        
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
