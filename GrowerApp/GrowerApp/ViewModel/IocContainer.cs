@@ -51,6 +51,8 @@ namespace GrowerApp.ViewModel
 
         public static void CreateContainer()
         {
+            SimpleIoc.Default.Register(() => DependencyService.Get<ILogger>());
+
             //Register your dependencies here...
             SimpleIoc.Default.Register(() => DependencyService.Get<IDbOperations>());
             SimpleIoc.Default.Register<IDbSchemaService, DbSchemaService>();

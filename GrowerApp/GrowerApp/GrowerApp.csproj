@@ -40,6 +40,7 @@
     </Compile>
     <Compile Include="Interfaces\IDbOperations.cs" />
     <Compile Include="Interfaces\IDbSchemaService.cs" />
+    <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Model\News.cs" />
     <Compile Include="Services\DbSchemaService.cs" />
     <Compile Include="View\MainPage.xaml.cs">
