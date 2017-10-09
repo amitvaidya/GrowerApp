@@ -1,4 +1,12 @@
+using System.Collections.ObjectModel;
+using System.Windows.Input;
+using Components.Component;
+using Components.Component.News;
+using Components.Component.News.Model;
+using Components.Component.Weather;
 using GalaSoft.MvvmLight;
+using HarmanPOC.Helper;
+using Xamarin.Forms;
 
 namespace GrowerApp.ViewModel
 {
@@ -29,6 +37,153 @@ namespace GrowerApp.ViewModel
             ////{
             ////    // Code runs "for real"
             ////}
+            
+            PopulateDummyData();
+            VisibilityCommandInit();
         }
+
+        private ComponentsManager _newsManager;
+
+        public ComponentsManager ViewManager
+        {
+            get { return _newsManager; }
+            set
+            {
+                _newsManager = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private ObservableCollection<NewsModel> _listofNews;
+
+        public ObservableCollection<NewsModel> ListOfNews
+        {
+            get { return _listofNews; }
+            set
+            {
+                _listofNews = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private string _selectedView = string.Empty;
+
+        public string SelectedView
+        {
+            get { return _selectedView; }
+            set
+            {
+                _selectedView = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private bool _previousItemVisibility;
+
+        public bool PreviousItemVisibility
+        {
+            get { return _previousItemVisibility; }
+            set
+            {
+                _previousItemVisibility = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private bool _nextItemVisibility;
+
+        public bool NextItemVisibility
+        {
+            get { return _nextItemVisibility; }
+            set
+            {
+                _nextItemVisibility = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public ICommand NavigationCommand => new Command(o => NavigateToPage(o));
+
+        public ICommand NextItemCommand => new Command(NavigateToNextView);
+
+        public ICommand PreviousItemCommand => new Command(NavigateToPreviousView);
+
+        public ICommand BackButtonCommand => new Command(() =>
+        {
+            ViewManager.BackCommand();
+        });
+
+        private void NavigateToPage(object commandParameter)
+        {
+            ViewManager.Dispose();
+            switch (commandParameter.ToString())
+            {
+                case AppConstants.News:
+                    ViewManager = new NewsManager() { ItemsSource = ListOfNews };
+                    break;
+                case AppConstants.Weather:
+                    ViewManager = new WeatherManager() { };
+                    break;
+            }
+            SelectedView = commandParameter.ToString();
+            VisibilityCommandInit();
+        }
+
+        private void NavigateToNextView()
+        {
+            MessagingCenter.Send(AppConstants.NextCommand, AppConstants.NextCommand);
+        }
+
+        private void NavigateToPreviousView()
+        {
+            MessagingCenter.Send(AppConstants.PreviousCommand, AppConstants.NextCommand);
+        }
+
+        private void VisibilityCommandInit()
+        {
+            NextItemVisibility = false;
+            PreviousItemVisibility = false;
+            MessagingCenter.Unsubscribe<string>(this, AppConstants.ItemVisibility);
+            MessagingCenter.Subscribe<string>(this, AppConstants.ItemVisibility, (sender) =>
+            {
+                switch (sender)
+                {
+                    case AppConstants.NextVisible:
+                        NextItemVisibility = true;
+                        break;
+                    case AppConstants.PreviousVisible:
+                        PreviousItemVisibility = true;
+                        break;
+                    case AppConstants.NextInvisible:
+                        NextItemVisibility = false;
+                        break;
+                    case AppConstants.PreviousInVisible:
+                        PreviousItemVisibility = false;
+                        break;
+                }
+            });
+        }
+
+        private void PopulateDummyData()
+        {
+            SelectedView = "News";
+            //DI Injection
+            ListOfNews = new ObservableCollection<NewsModel>();
+            for (var i = 0; i < 20; i++)
+            {
+                var newsModel = new NewsModel
+                (
+                    "Title" + i.ToString(),
+                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." +
+                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                    "icon.png"
+                    //i % 2 == 0 ? "demo.png" : "demo2.png"
+                );
+                ListOfNews.Add(newsModel);
+            }
+            _selectedView = "News";
+            ViewManager = new NewsManager { ItemsSource = ListOfNews };
+        }
+
     }
 }

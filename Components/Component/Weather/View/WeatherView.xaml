@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="Components.Component.Weather.View.WeatherView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ContentView.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid
+                Grid.Row="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="0" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="Szerda" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="30.08" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="3"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="Pentek" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="3"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="01.09" />
+            </Grid>
+            <Grid
+                Grid.Row="1"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Row="0"
+                    FontAttributes="Bold"
+                    FontSize="24"
+                    Text="Csutortok" />
+                <Label
+                    Grid.Row="1"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="31.08"
+                    VerticalTextAlignment="Center" />
+            </Grid>
+            <Image
+                Grid.Row="3"
+                HeightRequest="150"
+                HorizontalOptions="FillAndExpand"
+                Source="sun.png"
+                VerticalOptions="FillAndExpand" />
+            <Grid Grid.Row="4" VerticalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Image
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
+                    Source="rain.png" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    HorizontalTextAlignment="Center"
+                    Text="0 mm"
+                    VerticalOptions="Center" />
+                <Image
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    HorizontalOptions="Center"
+                    Source="wind.png" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    FontAttributes="Bold"
+                    HorizontalTextAlignment="Center"
+                    Text="7 km/h DK"
+                    VerticalOptions="Center" />
+                <Image
+                    Grid.Row="0"
+                    Grid.Column="3"
+                    HorizontalOptions="Center"
+                    Source="temp.png" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="3"
+                    FontAttributes="Bold"
+                    HorizontalTextAlignment="Center"
+                    Text="33"
+                    VerticalOptions="Center" />
+            </Grid>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

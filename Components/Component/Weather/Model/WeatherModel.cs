@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Components.Components.News
+namespace Components.Component.Weather.Model
 {
-    class NewsManager
+    public class WeatherModel
     {
+
     }
 }

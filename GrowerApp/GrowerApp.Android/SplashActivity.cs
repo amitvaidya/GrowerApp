@@ -29,8 +29,6 @@ namespace GrowerApp.Droid
             dbSchemaService.CreateDatabaseAndTables();
 
             this.StartActivity(typeof(MainActivity));
-
-            Android.Util.Log.Error()
         }
     }
 }

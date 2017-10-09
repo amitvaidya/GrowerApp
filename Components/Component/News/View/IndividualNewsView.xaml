@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="Components.Component.News.View.IndividualNewsView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ContentView.Content>
+        <ScrollView>
+            <Grid RowSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="10" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <ActivityIndicator
+                    Grid.Row="0"
+                    Grid.RowSpan="5"
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
+                    IsRunning="{Binding IsBusy}"
+                    IsVisible="{Binding IsBusy}"
+                    VerticalOptions="Center"
+                    Color="{StaticResource TabContentColor}" />
+                <Image
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Aspect="AspectFill"
+                    BackgroundColor="Red"
+                    Source="{Binding NewsModelData.NewsIcon}" />
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    Text="{Binding NewsModelData.NewsTitle}"
+                    VerticalTextAlignment="Center" />
+                <Label
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    FontSize="14"
+                    HorizontalTextAlignment="Start"
+                    Text="{Binding NewsModelData.NewsContent}"
+                    VerticalTextAlignment="Start" />
+            </Grid>
+        </ScrollView>
+    </ContentView.Content>
+</ContentView>

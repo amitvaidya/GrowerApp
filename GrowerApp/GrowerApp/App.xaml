@@ -1,13 +1,21 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="GrowerApp.App" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" d1p1:Ignorable="d" 
-             xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:forms="http://xamarin.com/schemas/2014/forms">
-  <Application.Resources>
-    <!-- Application resource dictionary -->
-    <forms:ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-      <vm:IocContainer x:Key="Locator" d:IsDataSource="True" 
-                           xmlns:vm="clr-namespace:GrowerApp.ViewModel" />
-    </forms:ResourceDictionary>
-  </Application.Resources>
-</Application>
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<forms:Application
+    x:Class="GrowerApp.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:component="clr-namespace:Components.Component;assembly=Components"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:forms="http://xamarin.com/schemas/2014/forms"
+    d1p1:Ignorable="d">
+    <forms:Application.Resources>
+        <!--  Application resource dictionary  -->
+        <forms:ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" >
+            <vm:IocContainer
+                xmlns:vm="clr-namespace:GrowerApp.ViewModel"
+                x:Key="Locator"
+                d:IsDataSource="True" />
+            <forms:Color x:Key="TabContentColor">#1792E5</forms:Color>
+        </forms:ResourceDictionary>
+    </forms:Application.Resources>
+</forms:Application>

@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="Components.Component.News.View.NewsView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:Components.Component.News.Behaviors;assembly=Components"
+    x:Name="ContentView">
+    <ContentView.Content>
+        <ListView
+            behaviors:ItemTappedListViewBehavior.ItemTappedCommand="{Binding ItemSelectedCommand}"
+            HorizontalOptions="FillAndExpand"
+            ItemsSource="{Binding ItemsSource, Mode=TwoWay}"
+            RowHeight="80"
+            VerticalOptions="FillAndExpand">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid
+                            ColumnSpacing="0"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="10" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                            </Grid.RowDefinitions>
+
+                            <Grid
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                ColumnSpacing="0"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Aspect="AspectFit"
+                                    HorizontalOptions="Fill"
+                                    Source="{Binding NewsIcon}"
+                                    VerticalOptions="FillAndExpand" />
+                                <BoxView Grid.Column="2" BackgroundColor="Gray" />
+                                <Frame
+                                    Grid.Column="2"
+                                    Margin="1"
+                                    Padding="1"
+                                    CornerRadius="0"
+                                    HasShadow="False"
+                                    HorizontalOptions="Start"
+                                    OutlineColor="Gray"
+                                    VerticalOptions="StartAndExpand">
+                                    <StackLayout
+                                        HorizontalOptions="Start"
+                                        Orientation="Vertical"
+                                        Spacing="0"
+                                        VerticalOptions="Start">
+                                        <Label Text="{Binding NewsTitle}" />
+                                        <Label Text="{Binding NewsContent}" />
+                                    </StackLayout>
+                                </Frame>
+                            </Grid>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentView.Content>
+</ContentView>
