@@ -3,9 +3,20 @@
     x:Class="GrowerApp.View.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:control="clr-namespace:Components.Component.Control;assembly=Components"
     xmlns:local="clr-namespace:GrowerApp.View"
     BackgroundColor="White"
     BindingContext="{Binding MainPageViewModel, Source={StaticResource Locator}}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="#303030" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontAttributes" Value="None" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.Content>
         <Grid>
@@ -86,7 +97,7 @@
                 </ContentView.Content>-->
             </ContentView>
 
-            <StackLayout
+            <!--<StackLayout
                 Grid.Row="2"
                 BackgroundColor="White"
                 Orientation="Horizontal">
@@ -119,7 +130,204 @@
                     FontSize="10"
                     Text="Relationship"
                     WidthRequest="70" />
-            </StackLayout>
+            </StackLayout>-->
+
+            <Grid
+                x:Name="Footergrid"
+                Grid.Row="2"
+                Grid.Column="0"
+                BackgroundColor="#E7E7E7"
+                HorizontalOptions="FillAndExpand"
+                RowSpacing="0"
+                VerticalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="1" />
+                </Grid.RowDefinitions>
+
+                <BoxView
+                    x:Name="boxView"
+                    Grid.Row="1"
+                    Grid.RowSpan="2"
+                    Grid.Column="0"
+                    BackgroundColor="Orange" />
+
+                <control:TabContentButton
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Command="{Binding NavigationCommand}"
+                    CommandParameter="{Binding Source={x:Reference newsLabel}, Path=Text}"
+                    HorizontalOptions="Center"
+                    SelectionCommandParameter="{Binding Source={x:Reference boxView}}"
+                    VerticalOptions="Center">
+                    <control:TabContentButton.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </control:TabContentButton.ColumnDefinitions>
+                    <control:TabContentButton.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </control:TabContentButton.RowDefinitions>
+                    <Image
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Aspect="AspectFit"
+                        HorizontalOptions="Center"
+                        Source="star.png"
+                        VerticalOptions="Center" />
+                    <Label
+                        x:Name="newsLabel"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Text="News"
+                        TextColor="{StaticResource TabContentColor}"
+                        VerticalOptions="EndAndExpand" />
+                </control:TabContentButton>
+
+                <control:TabContentButton
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    BackgroundColor="Transparent"
+                    Command="{Binding NavigationCommand}"
+                    CommandParameter="{Binding Source={x:Reference WeatherLabel}, Path=Text}"
+                    HorizontalOptions="Center"
+                    SelectionCommandParameter="{Binding Source={x:Reference boxView}}"
+                    VerticalOptions="Center">
+                    <control:TabContentButton.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </control:TabContentButton.ColumnDefinitions>
+                    <control:TabContentButton.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </control:TabContentButton.RowDefinitions>
+                    <Image
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Aspect="AspectFit"
+                        HorizontalOptions="Center"
+                        Source="star.png"
+                        VerticalOptions="Center" />
+                    <Label
+                        x:Name="WeatherLabel"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        LineBreakMode="WordWrap"
+                        Text="Weather"
+                        TextColor="{StaticResource TabContentColor}"
+                        VerticalOptions="EndAndExpand" />
+                </control:TabContentButton>
+
+                <control:TabContentButton
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Command="{Binding NavigationCommand}"
+                    CommandParameter="{Binding Source={x:Reference commodityLabel}, Path=Text}"
+                    HorizontalOptions="Center"
+                    SelectionCommandParameter="{Binding Source={x:Reference boxView}}"
+                    VerticalOptions="Center">
+                    <control:TabContentButton.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </control:TabContentButton.ColumnDefinitions>
+                    <control:TabContentButton.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </control:TabContentButton.RowDefinitions>
+                    <Image
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Aspect="AspectFit"
+                        HorizontalOptions="Center"
+                        Source="star.png"
+                        VerticalOptions="Center" />
+                    <Label
+                        x:Name="commodityLabel"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Text="Commodity"
+                        TextColor="{StaticResource TabContentColor}"
+                        VerticalOptions="EndAndExpand" />
+                </control:TabContentButton>
+
+                <control:TabContentButton
+                    x:Name="Btnevents"
+                    Grid.Row="1"
+                    Grid.Column="3"
+                    Command="{Binding NavigationCommand}"
+                    CommandParameter="{Binding Source={x:Reference productLabel}, Path=Text}"
+                    HorizontalOptions="Center"
+                    SelectionCommandParameter="{Binding Source={x:Reference boxView}}"
+                    VerticalOptions="Center">
+                    <control:TabContentButton.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </control:TabContentButton.ColumnDefinitions>
+                    <control:TabContentButton.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </control:TabContentButton.RowDefinitions>
+                    <Image
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Aspect="AspectFit"
+                        HorizontalOptions="Center"
+                        Source="star.png"
+                        VerticalOptions="Center" />
+                    <Label
+                        x:Name="productLabel"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Text="Products"
+                        TextColor="{StaticResource TabContentColor}"
+                        VerticalOptions="EndAndExpand" />
+                </control:TabContentButton>
+
+                <control:TabContentButton
+                    Grid.Row="1"
+                    Grid.Column="4"
+                    Command="{Binding NavigationCommand}"
+                    CommandParameter="{Binding Source={x:Reference relationshipLabel}, Path=Text}"
+                    HorizontalOptions="Center"
+                    SelectionCommandParameter="{Binding Source={x:Reference boxView}}"
+                    VerticalOptions="Center">
+                    <control:TabContentButton.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </control:TabContentButton.ColumnDefinitions>
+                    <control:TabContentButton.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </control:TabContentButton.RowDefinitions>
+                    <Image
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Aspect="AspectFit"
+                        HorizontalOptions="Center"
+                        Source="star.png"
+                        VerticalOptions="Center" />
+                    <Label
+                        x:Name="relationshipLabel"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Text="RelationShip"
+                        TextColor="{StaticResource TabContentColor}"
+                        VerticalOptions="EndAndExpand" />
+                </control:TabContentButton>
+            </Grid>
 
         </Grid>
     </ContentPage.Content>
