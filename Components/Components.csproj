@@ -36,6 +36,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Component\ComponentsManager.cs" />
+    <Compile Include="Component\Control\ExtendedGridView.cs" />
+    <Compile Include="Component\Control\TabContentGrid.cs" />
     <Compile Include="Component\Helper\AppConstants.cs" />
     <Compile Include="Component\Helper\DataTemplateHelper.cs" />
     <Compile Include="Component\Helper\ViewModelBase.cs" />
@@ -51,7 +53,11 @@
       <DependentUpon>NewsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Component\Weather\Model\WeatherModel.cs" />
+    <Compile Include="Component\Weather\ViewModel\WeatherDetailViewModel.cs" />
     <Compile Include="Component\Weather\ViewModel\WeatherViewModel.cs" />
+    <Compile Include="Component\Weather\View\WeatherPagedView.xaml.cs">
+      <DependentUpon>WeatherPagedView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Component\Weather\View\WeatherView.xaml.cs">
       <DependentUpon>WeatherView.xaml</DependentUpon>
     </Compile>
@@ -88,6 +94,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Component\Weather\View\WeatherPagedView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

@@ -115,18 +115,24 @@ namespace GrowerApp.ViewModel
 
         private void NavigateToPage(object commandParameter)
         {
-            ViewManager.Dispose();
             switch (commandParameter.ToString())
             {
                 case AppConstants.News:
-                    ViewManager = new NewsManager() { ItemsSource = ListOfNews };
+                    if(ViewManager is NewsManager)
+                        break;
+                    ViewManager.Dispose();
+                    ViewManager = new NewsManager() {ItemsSource = ListOfNews};
+                    VisibilityCommandInit();
                     break;
                 case AppConstants.Weather:
+                    if (ViewManager is WeatherManager)
+                        break;
+                    ViewManager.Dispose();
                     ViewManager = new WeatherManager() { };
+                    VisibilityCommandInit(true);
                     break;
             }
             SelectedView = commandParameter.ToString();
-            VisibilityCommandInit();
         }
 
         private void NavigateToNextView()
@@ -139,10 +145,10 @@ namespace GrowerApp.ViewModel
             MessagingCenter.Send(AppConstants.PreviousCommand, AppConstants.NextCommand);
         }
 
-        private void VisibilityCommandInit()
+        private void VisibilityCommandInit(bool visibility = false)
         {
-            NextItemVisibility = false;
-            PreviousItemVisibility = false;
+            NextItemVisibility = visibility;
+            PreviousItemVisibility = visibility;
             MessagingCenter.Unsubscribe<string>(this, AppConstants.ItemVisibility);
             MessagingCenter.Subscribe<string>(this, AppConstants.ItemVisibility, (sender) =>
             {
@@ -177,12 +183,11 @@ namespace GrowerApp.ViewModel
                     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." +
                     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                     "icon.png"
-                //i % 2 == 0 ? "demo.png" : "demo2.png"
+                    //i % 2 == 0 ? "demo.png" : "demo2.png"
                 );
                 ListOfNews.Add(newsModel);
             }
-            _selectedView = "News";
-            ViewManager = new NewsManager { ItemsSource = ListOfNews };
+            ViewManager = new NewsManager {ItemsSource = ListOfNews};
         }
 
     }

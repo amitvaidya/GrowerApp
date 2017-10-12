@@ -1,5 +1,6 @@
 ﻿using Components.Component.Weather.View;
 using Components.Component.Weather.ViewModel;
+using HarmanPOC.Helper;
 
 namespace Components.Component.Weather
 {
@@ -7,8 +8,15 @@ namespace Components.Component.Weather
     {
         public WeatherManager()
         {
-            viewModel = new WeatherViewModel();
+            viewModel = new WeatherViewModel(this);
             CurrentView = new WeatherView() {BindingContext = viewModel};
+        }
+
+        internal void UpdateView(CustomDataTemplate template)
+        {
+            BackStack.Add(CurrentView);
+            var content = template.CreateContent();
+            CurrentView = content;
         }
     }
 }

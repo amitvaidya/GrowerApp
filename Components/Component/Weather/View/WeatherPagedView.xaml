@@ -1,0 +1,501 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="Components.Component.Weather.View.WeatherPagedView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:control="clr-namespace:Components.Component.Control;assembly=Components"
+    xmlns:view="clr-namespace:Components.Component.Weather.View;assembly=Components">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style x:Key="HeaderStyle" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="12" />
+            </Style>
+            <Style x:Key="SubHeaderStyle" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="12" />
+            </Style>
+            <Style x:Key="ContentStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="8" />
+            </Style>
+            <Style
+                x:Key="FooterStyle"
+                BaseResourceKey="ContentStyle"
+                TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid RowSpacing="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="10" />
+            </Grid.RowDefinitions>
+
+            <!--  HeaderRow  -->
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <BoxView
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    BackgroundColor="Orange" />
+                <Label
+                    Grid.Column="0"
+                    Style="{StaticResource HeaderStyle}"
+                    Text="47.16255, 19.50333" />
+                <Label
+                    Grid.Column="1"
+                    Style="{StaticResource HeaderStyle}"
+                    Text="$ze 30.08" />
+            </Grid>
+            <!--  End of Header Row  -->
+
+            <!--  SubHeaderRow  -->
+            <Grid Grid.Row="2" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <BoxView Grid.Column="0" BackgroundColor="Gray" />
+                <Label
+                    Grid.Column="0"
+                    Style="{StaticResource SubHeaderStyle}"
+                    Text="{Binding WeatherData.WeatherWeek}" />
+            </Grid>
+            <!--  End of SubHeader Row  -->
+
+            <!--  ContentRow  -->
+            <Grid Grid.Row="3" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Image
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Source="{Binding WeatherData.CurrentWeather}" />
+                <!--  Tabular Content  -->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        HorizontalTextAlignment="Start"
+                        Text="Maximum Temp" />
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="3"
+                        FontAttributes="Bold"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding WeatherData.MaxTemp}"
+                        VerticalTextAlignment="Center" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        HorizontalTextAlignment="Start"
+                        Text="Maximum Temp" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="3"
+                        FontAttributes="Bold"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding WeatherData.MinTemp}"
+                        VerticalTextAlignment="Center" />
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        HorizontalTextAlignment="Start"
+                        Text="Maximum Temp" />
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="3"
+                        FontAttributes="Bold"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding WeatherData.WeatherValue}"
+                        VerticalTextAlignment="Center" />
+                    <Label
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        HorizontalTextAlignment="Start"
+                        Text="Maximum Temp" />
+                    <Label
+                        Grid.Row="3"
+                        Grid.Column="3"
+                        FontAttributes="Bold"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding WeatherData.ChanceOfRain}"
+                        VerticalTextAlignment="Center" />
+                    <Label
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        HorizontalTextAlignment="Start"
+                        Text="Maximum Temp" />
+                    <Label
+                        Grid.Row="4"
+                        Grid.Column="3"
+                        FontAttributes="Bold"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding WeatherData.Humidity}"
+                        VerticalTextAlignment="Center" />
+                    <Label
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        HorizontalTextAlignment="Start"
+                        Text="Maximum Temp" />
+                    <Label
+                        Grid.Row="5"
+                        Grid.Column="3"
+                        FontAttributes="Bold"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding WeatherData.Pressure}"
+                        VerticalTextAlignment="Center" />
+                    <Label
+                        Grid.Row="6"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        HorizontalTextAlignment="Start"
+                        Text="Maximum Temp" />
+                    <Label
+                        Grid.Row="6"
+                        Grid.Column="3"
+                        FontAttributes="Bold"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding WeatherData.TempValue}"
+                        VerticalTextAlignment="Center" />
+                </Grid>
+                <!--  End of Tabular Content  -->
+            </Grid>
+            <!--  End of Content Row  -->
+
+            <!--  FooterRow  -->
+            <Grid
+                Grid.Row="5"
+                Grid.Column="1"
+                RowSpacing="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <control:ExtendedGridView
+                    x:Name="Custom"
+                    Grid.Row="0"
+                    ColumnSpacing="1"
+                    ItemsSource="{Binding WeatherDataCollection}"
+                    MaxColumns="8"
+                    MaxRows="1"
+                    RowSpacing="1">
+                    <control:ExtendedGridView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <BoxView
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    BackgroundColor="Gray" />
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    HorizontalOptions="Center"
+                                    HorizontalTextAlignment="Center"
+                                    Style="{StaticResource FooterStyle}"
+                                    Text="{Binding}"
+                                    VerticalOptions="Center" />
+                            </Grid>
+                        </DataTemplate>
+                    </control:ExtendedGridView.ItemTemplate>
+                </control:ExtendedGridView>
+                <control:ExtendedGridView
+                    Grid.Row="1"
+                    ColumnSpacing="1"
+                    ItemsSource="{Binding WeatherDataCollection}"
+                    MaxColumns="8"
+                    MaxRows="1"
+                    RowSpacing="1">
+                    <control:ExtendedGridView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <BoxView
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    BackgroundColor="LightGreen" />
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    HorizontalOptions="Center"
+                                    HorizontalTextAlignment="Center"
+                                    Style="{StaticResource FooterStyle}"
+                                    Text="{Binding}"
+                                    VerticalOptions="Center" />
+                            </Grid>
+                        </DataTemplate>
+                    </control:ExtendedGridView.ItemTemplate>
+                </control:ExtendedGridView>
+            </Grid>
+
+            <!--<Grid
+                Grid.Row="5"
+                Grid.Column="1"
+                ColumnSpacing="1"
+                RowSpacing="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <BoxView
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    BackgroundColor="Gray" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource FooterStyle}"
+                    Text="00"
+                    VerticalOptions="Center" />
+                <BoxView
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    BackgroundColor="Gray" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource FooterStyle}"
+                    Text="01"
+                    VerticalOptions="Center" />
+                <BoxView
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    BackgroundColor="Gray" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource FooterStyle}"
+                    Text="02"
+                    VerticalOptions="Center" />
+                <BoxView
+                    Grid.Row="0"
+                    Grid.Column="3"
+                    BackgroundColor="Gray" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="3"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource FooterStyle}"
+                    Text="03"
+                    VerticalOptions="Center" />
+                <BoxView
+                    Grid.Row="0"
+                    Grid.Column="4"
+                    BackgroundColor="Gray" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="4"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource FooterStyle}"
+                    Text="04"
+                    VerticalOptions="Center" />
+                <BoxView
+                    Grid.Row="0"
+                    Grid.Column="5"
+                    BackgroundColor="Gray" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="5"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource FooterStyle}"
+                    Text="05"
+                    VerticalOptions="Center" />
+                <BoxView
+                    Grid.Row="0"
+                    Grid.Column="6"
+                    BackgroundColor="Gray" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="6"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource FooterStyle}"
+                    Text="06"
+                    VerticalOptions="Center" />
+                <BoxView
+                    Grid.Row="0"
+                    Grid.Column="7"
+                    BackgroundColor="Gray" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="7"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource FooterStyle}"
+                    Text="07"
+                    VerticalOptions="Center" />
+
+
+                <BoxView
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    BackgroundColor="Gray" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource FooterStyle}"
+                    Text="00"
+                    VerticalOptions="Center" />
+                <BoxView
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    BackgroundColor="Gray" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource FooterStyle}"
+                    Text="01"
+                    VerticalOptions="Center" />
+                <BoxView
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    BackgroundColor="Gray" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource FooterStyle}"
+                    Text="02"
+                    VerticalOptions="Center" />
+                <BoxView
+                    Grid.Row="1"
+                    Grid.Column="3"
+                    BackgroundColor="Gray" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="3"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource FooterStyle}"
+                    Text="03"
+                    VerticalOptions="Center" />
+                <BoxView
+                    Grid.Row="1"
+                    Grid.Column="4"
+                    BackgroundColor="Gray" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="4"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource FooterStyle}"
+                    Text="04"
+                    VerticalOptions="Center" />
+                <BoxView
+                    Grid.Row="1"
+                    Grid.Column="5"
+                    BackgroundColor="Gray" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="5"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource FooterStyle}"
+                    Text="05"
+                    VerticalOptions="Center" />
+                <BoxView
+                    Grid.Row="1"
+                    Grid.Column="6"
+                    BackgroundColor="Gray" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="6"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource FooterStyle}"
+                    Text="06"
+                    VerticalOptions="Center" />
+                <BoxView
+                    Grid.Row="1"
+                    Grid.Column="7"
+                    BackgroundColor="Gray" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="7"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource FooterStyle}"
+                    Text="07"
+                    VerticalOptions="Center" />
+            </Grid>-->
+
+            <!--  End of Footer Row  -->
+
+        </Grid>
+    </ContentView.Content>
+</ContentView>
