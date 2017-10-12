@@ -5,16 +5,26 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:control="clr-namespace:Components.Component.Control;assembly=Components"
     xmlns:local="clr-namespace:GrowerApp.View"
+    xmlns:effects="clr-namespace:Components.Effects;assembly=Components"
     BackgroundColor="White"
     BindingContext="{Binding MainPageViewModel, Source={StaticResource Locator}}">
 
     <ContentPage.Resources>
         <ResourceDictionary>
+
+            <Color x:Key="ToolbarDarkColor">White</Color>
+
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="#303030" />
-                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontSize" Value="10" />
                 <Setter Property="FontAttributes" Value="None" />
             </Style>
+
+            <Style x:Key="HeaderGridStyle" TargetType="{x:Type Grid}">
+                <Setter Property="HeightRequest" Value="100" />
+                <Setter Property="BackgroundColor" Value="{StaticResource ToolbarDarkColor}" />
+            </Style>
+
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -23,7 +33,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="90" />
                 <RowDefinition />
-                <RowDefinition Height="70" />
+                <RowDefinition Height="50" />
             </Grid.RowDefinitions>
 
             <Grid Row="0">
@@ -133,9 +143,9 @@
             </StackLayout>-->
 
             <Grid
-                x:Name="Footergrid"
                 Grid.Row="2"
                 Grid.Column="0"
+                x:Name="Footergrid"
                 BackgroundColor="#E7E7E7"
                 HorizontalOptions="FillAndExpand"
                 RowSpacing="0"
@@ -158,7 +168,7 @@
                     Grid.Row="1"
                     Grid.RowSpan="2"
                     Grid.Column="0"
-                    BackgroundColor="Orange" />
+                    BackgroundColor="LightSkyBlue" />
 
                 <control:TabContentButton
                     Grid.Row="1"
@@ -180,8 +190,12 @@
                         Grid.Column="0"
                         Aspect="AspectFit"
                         HorizontalOptions="Center"
-                        Source="star.png"
-                        VerticalOptions="Center" />
+                        Source="news.png"
+                        VerticalOptions="Center">
+                        <Image.Effects>
+                            <effects:TintEffect TintColor="{StaticResource TabContentColor}" />
+                        </Image.Effects>
+                    </Image>
                     <Label
                         x:Name="newsLabel"
                         Grid.Row="1"
@@ -214,8 +228,12 @@
                         Grid.Column="0"
                         Aspect="AspectFit"
                         HorizontalOptions="Center"
-                        Source="star.png"
-                        VerticalOptions="Center" />
+                        Source="weather.png"
+                        VerticalOptions="Center">
+                        <Image.Effects>
+                            <effects:TintEffect TintColor="{StaticResource TabContentColor}" />
+                        </Image.Effects>
+                    </Image>
                     <Label
                         x:Name="WeatherLabel"
                         Grid.Row="1"
@@ -248,8 +266,12 @@
                         Grid.Column="0"
                         Aspect="AspectFit"
                         HorizontalOptions="Center"
-                        Source="star.png"
-                        VerticalOptions="Center" />
+                        Source="commodity.png"
+                        VerticalOptions="Center">
+                        <Image.Effects>
+                            <effects:TintEffect TintColor="{StaticResource TabContentColor}" />
+                        </Image.Effects> -->
+                    </Image>
                     <Label
                         x:Name="commodityLabel"
                         Grid.Row="1"
@@ -282,8 +304,12 @@
                         Grid.Column="0"
                         Aspect="AspectFit"
                         HorizontalOptions="Center"
-                        Source="star.png"
-                        VerticalOptions="Center" />
+                        Source="products.png"
+                        VerticalOptions="Center">
+                        <Image.Effects>
+                            <effects:TintEffect TintColor="{StaticResource TabContentColor}" />
+                        </Image.Effects>
+                    </Image>
                     <Label
                         x:Name="productLabel"
                         Grid.Row="1"
@@ -315,8 +341,12 @@
                         Grid.Column="0"
                         Aspect="AspectFit"
                         HorizontalOptions="Center"
-                        Source="star.png"
-                        VerticalOptions="Center" />
+                        Source="relationship.png"
+                        VerticalOptions="Center">
+                        <Image.Effects>
+                            <effects:TintEffect TintColor="{StaticResource TabContentColor}" />
+                        </Image.Effects>
+                    </Image>
                     <Label
                         x:Name="relationshipLabel"
                         Grid.Row="1"
