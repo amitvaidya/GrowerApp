@@ -9,11 +9,11 @@ namespace GrowerApp.Services
 {
     public class DbSchemaService : IDbSchemaService
     {
-        private readonly SQLiteConnection _conn;
+        private readonly SQLiteConnection conn;
 
         public DbSchemaService(IDbOperations dbOperations)
         {
-            _conn = dbOperations.GetDbConnection();
+            conn = dbOperations.GetDbConnection();
         }
 
         public void CreateDatabaseAndTables()
@@ -21,15 +21,18 @@ namespace GrowerApp.Services
             try
             {
                 //check and create News table.
-                var cmd = _conn.CreateCommand("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = 'News'");
-                //            cmd.Parameters.AddWithValue("@name", tableName);
-                if (cmd.ExecuteScalar<int>() == 0)
-                    _conn.CreateTable<News>();
+                TableExists("News", result => { if (result) conn.CreateTable<News>(); });
             }
             catch (Exception ex)
             {
                 IocContainer.Container.GetInstance<ILogger>().LogError("CreateDatabaseAndTables", ex.Message);
             }
+        }
+
+        public void TableExists(string tableName, Action<bool> callbackAction)
+        {
+            var cmd = conn.CreateCommand($"SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '{tableName}'");
+            callbackAction(cmd.ExecuteScalar<int>() != 0);
         }
     }
 }

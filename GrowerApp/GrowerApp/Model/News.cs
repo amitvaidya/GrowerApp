@@ -20,6 +20,9 @@ namespace GrowerApp.Model
         public string Image { get; set; }
 
         [NotNull]
-        public string NewsDetails { get; set; }
+        public string Details { get; set; }
+
+        [NotNull]
+        public string CreatedDate { get; set; }
     }
 }
