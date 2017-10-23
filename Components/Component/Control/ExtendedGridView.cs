@@ -9,19 +9,21 @@ namespace Components.Component.Control
 {
     public class ExtendedGridView : Grid
     {
+        private int maxColumns = 2;
+        private int maxrows = 1;
+
         public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create<ExtendedGridView, object>(p => p.CommandParameter, null);
         public static readonly BindableProperty CommandProperty = BindableProperty.Create<ExtendedGridView, ICommand>(p => p.Command, null);
-        private int _maxColumns = 2;
-        private int _maxrows = 1;
 
-        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create("ItemsSource", typeof(object), typeof(ExtendedGridView), null, BindingMode.Default, null, (bindable, oldvalue, newvalue) => { OnItemsSourceProperyChanged(bindable, oldvalue, newvalue); }, null, null, null);
+        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create("ItemsSource", typeof(object), typeof(ExtendedGridView),
+            null, BindingMode.Default, null, OnItemsSourceProperyChanged, null, null, null);
 
         private static async void OnItemsSourceProperyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
             if (newvalue != null)
             {
-                var parent = bindable as ExtendedGridView;
-                if (parent != null) await parent.BuildTiles();
+                if (bindable is ExtendedGridView parent)
+                    await parent.BuildTiles();
             }
         }
 
@@ -55,14 +57,14 @@ namespace Components.Component.Control
 
         public int MaxColumns
         {
-            get { return _maxColumns; }
-            set { _maxColumns = value; }
+            get { return maxColumns; }
+            set { maxColumns = value; }
         }
 
         public int MaxRows
         {
-            get { return _maxrows; }
-            set { _maxrows = value; }
+            get { return maxrows; }
+            set { maxrows = value; }
         }
 
         public object CommandParameter
@@ -81,38 +83,39 @@ namespace Components.Component.Control
         {
             // Wipe out the previous row definitions if they're there.
             if (RowDefinitions.Any())
-            {
                 RowDefinitions.Clear();
-            }
-            var decType = ItemsSource.GetType().GetGenericTypeDefinition();
             var enumerable = ItemsSource as IList;
-            var numberOfRows = Math.Ceiling(enumerable.Count / (float)MaxColumns);                        
-
-            if (MaxRows > 1)
+            if (enumerable != null)
             {
-                for (var i = 0; i < numberOfRows; i++)
+                var numberOfRows = Math.Ceiling(enumerable.Count / (float) MaxColumns);
+
+                if (MaxRows > 1)
+                {
+                    for (var i = 0; i < numberOfRows; i++)
+                    {
+                        RowDefinitions.Add(new RowDefinition {Height = GridLength.Auto});
+                    }
+                }
+                else
                 {
                     RowDefinitions.Add(new RowDefinition {Height = GridLength.Auto});
                 }
-            }
-            else
-            {
-                RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            }
 
-            for (var index = 0; index < enumerable.Count; index++)
-            {
-                var column = index % MaxColumns;
-                if (index >= MaxColumns && MaxRows <= 1)
-                    break;
-                var row = MaxRows > 1 ? (int)Math.Floor(index / (float)MaxColumns) : 1;
 
-                var tile = await BuildTile(enumerable[index]);
-                var dummyHeight = tile.Height;
+                for (var index = 0; index < enumerable.Count; index++)
+                {
+                    var column = index % MaxColumns;
+                    if (index >= MaxColumns && MaxRows <= 1)
+                        break;
+                    var row = MaxRows > 1 ? (int) Math.Floor(index / (float) MaxColumns) : 1;
 
-                Children.Add(tile, column, row);
+                    var tile = await BuildTile(enumerable[index]);
+                    var dummyHeight = tile.Height;
+
+                    Children.Add(tile, column, row);
+                }
+                InvalidateLayout();
             }
-            InvalidateLayout();
         }
 
         protected override bool ShouldInvalidateOnChildAdded(View child)

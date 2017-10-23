@@ -1,6 +1,6 @@
-﻿using Components.Component.Weather.View;
+﻿using Components.Component.Helper;
+using Components.Component.Weather.View;
 using Components.Component.Weather.ViewModel;
-using HarmanPOC.Helper;
 
 namespace Components.Component.Weather
 {

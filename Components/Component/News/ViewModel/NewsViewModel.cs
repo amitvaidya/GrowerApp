@@ -1,27 +1,25 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Components.Component.Helper;
 using Components.Component.News.Model;
 using Components.Component.News.View;
-using HarmanPOC.Helper;
 using Xamarin.Forms;
 
 namespace Components.Component.News.ViewModel
 {
     public class NewsViewModel : ViewModelBase
     {
-
         private NewsManager manager;
+        private IndividualNewsViewModel individualNewsViewModel;
 
-        public NewsViewModel(NewsManager _manager)
+//        public NewsViewModel(NewsManager manager, IndividualNewsViewModel individualNewsViewModel)
+        public NewsViewModel(IndividualNewsViewModel individualNewsViewModel)
         {
-            manager = _manager;
+            this.manager = manager;
+            this.individualNewsViewModel = individualNewsViewModel;
         }
 
-        public ICommand ItemSelectedCommand => new Command(o => OnItemSelected(o));
+        public ICommand ItemSelectedCommand => new Command(OnItemSelected);
 
         private ObservableCollection<NewsModel> itemsSource;
 
@@ -42,10 +40,12 @@ namespace Components.Component.News.ViewModel
 
         private void OnItemSelected(object selectedItem)
         {
-            var template = new CustomDataTemplate(new IndividualNewsViewModel(selectedItem as NewsModel, ItemsSource),
+            individualNewsViewModel.NewsModelData = selectedItem as NewsModel;
+            individualNewsViewModel.ItemsSource = ItemsSource;
+            var template = new CustomDataTemplate(individualNewsViewModel,
                 new DataTemplate(typeof(IndividualNewsView)));
             //TODO: Simple Viewmodel based navigation/ Content Switching
-            manager.UpdateView(template);
+//            manager.UpdateView(template);
         }
     }
 }

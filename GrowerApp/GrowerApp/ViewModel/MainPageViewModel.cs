@@ -1,12 +1,13 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Components.Component;
+using Components.Component.Helper;
 using Components.Component.News;
 using Components.Component.News.Model;
+using Components.Component.News.ViewModel;
 using Components.Component.Weather;
-using GalaSoft.MvvmLight;
-using HarmanPOC.Helper;
 using Xamarin.Forms;
+using ViewModelBase = GalaSoft.MvvmLight.ViewModelBase;
 
 namespace GrowerApp.ViewModel
 {
@@ -117,14 +118,14 @@ namespace GrowerApp.ViewModel
         {
             switch (commandParameter.ToString())
             {
-                case AppConstants.News:
+                case Constants.News:
                     if(ViewManager is NewsManager)
                         break;
                     ViewManager.Dispose();
-                    ViewManager = new NewsManager() {ItemsSource = ListOfNews};
+                    ViewManager = new NewsManager(IocContainer.Container.GetInstance<NewsViewModel>()) {ItemsSource = ListOfNews};
                     VisibilityCommandInit();
                     break;
-                case AppConstants.Weather:
+                case Constants.Weather:
                     if (ViewManager is WeatherManager)
                         break;
                     ViewManager.Dispose();
@@ -137,33 +138,33 @@ namespace GrowerApp.ViewModel
 
         private void NavigateToNextView()
         {
-            MessagingCenter.Send(AppConstants.NextCommand, AppConstants.NextCommand);
+            MessagingCenter.Send(Constants.NextCommand, Constants.NextCommand);
         }
 
         private void NavigateToPreviousView()
         {
-            MessagingCenter.Send(AppConstants.PreviousCommand, AppConstants.NextCommand);
+            MessagingCenter.Send(Constants.PreviousCommand, Constants.NextCommand);
         }
 
         private void VisibilityCommandInit(bool visibility = false)
         {
             NextItemVisibility = visibility;
             PreviousItemVisibility = visibility;
-            MessagingCenter.Unsubscribe<string>(this, AppConstants.ItemVisibility);
-            MessagingCenter.Subscribe<string>(this, AppConstants.ItemVisibility, (sender) =>
+            MessagingCenter.Unsubscribe<string>(this, Constants.ItemVisibility);
+            MessagingCenter.Subscribe<string>(this, Constants.ItemVisibility, (sender) =>
             {
                 switch (sender)
                 {
-                    case AppConstants.NextVisible:
+                    case Constants.NextVisible:
                         NextItemVisibility = true;
                         break;
-                    case AppConstants.PreviousVisible:
+                    case Constants.PreviousVisible:
                         PreviousItemVisibility = true;
                         break;
-                    case AppConstants.NextInvisible:
+                    case Constants.NextInvisible:
                         NextItemVisibility = false;
                         break;
-                    case AppConstants.PreviousInVisible:
+                    case Constants.PreviousInVisible:
                         PreviousItemVisibility = false;
                         break;
                 }
@@ -187,7 +188,7 @@ namespace GrowerApp.ViewModel
                 );
                 ListOfNews.Add(newsModel);
             }
-            ViewManager = new NewsManager {ItemsSource = ListOfNews};
+            ViewManager = new NewsManager(IocContainer.Container.GetInstance<NewsViewModel>()) {ItemsSource = ListOfNews};
         }
 
     }

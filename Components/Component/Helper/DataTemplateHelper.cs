@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Components.Component.Helper;
-using Components.Component.News.ViewModel;
 using Xamarin.Forms;
 
-namespace HarmanPOC.Helper
+namespace Components.Component.Helper
 {
     public class CustomDataTemplate : IDisposable
     {
@@ -21,9 +15,9 @@ namespace HarmanPOC.Helper
             internalTemplate = viewType;
         }
 
-        public Xamarin.Forms.View CreateContent()
+        public View CreateContent()
         {
-            var view = (Xamarin.Forms.View)internalTemplate.CreateContent();
+            var view = (View)internalTemplate.CreateContent();
             view.BindingContext = targetViewModel;
             return view;
         }

@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Components.Component.Helper;
 using Components.Component.Weather.Model;
-using HarmanPOC.Helper;
 using Xamarin.Forms;
 
 namespace Components.Component.Weather.ViewModel
@@ -72,7 +71,7 @@ namespace Components.Component.Weather.ViewModel
 
         private void HandleMessage()
         {
-            MessagingCenter.Subscribe<string>(this, AppConstants.NextCommand, async (sender) =>
+            MessagingCenter.Subscribe<string>(this, Constants.NextCommand, async (sender) =>
             {
                 IsBusy = true;
                 await Task.Delay(1000);
