@@ -62,6 +62,7 @@
       <DependentUpon>WeatherView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Component\Weather\WeatherManager.cs" />
+    <Compile Include="Effects\TintEffect.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

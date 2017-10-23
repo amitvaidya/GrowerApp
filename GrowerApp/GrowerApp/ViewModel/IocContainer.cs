@@ -12,6 +12,7 @@
   See http://www.galasoft.ch/mvvm
 */
 
+using Components.Component.News.ViewModel;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using GrowerApp.Interfaces;
@@ -56,7 +57,10 @@ namespace GrowerApp.ViewModel
             //Register your dependencies here...
             SimpleIoc.Default.Register(() => DependencyService.Get<IDbOperations>());
             SimpleIoc.Default.Register<IDbSchemaService, DbSchemaService>();
+
             SimpleIoc.Default.Register<MainPageViewModel>();
+            SimpleIoc.Default.Register<IndividualNewsViewModel>();
+            SimpleIoc.Default.Register<NewsViewModel>();
 
         }
 

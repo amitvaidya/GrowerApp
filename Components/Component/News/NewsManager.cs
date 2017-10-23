@@ -4,15 +4,14 @@ using Components.Component.Helper;
 using Components.Component.News.Model;
 using Components.Component.News.View;
 using Components.Component.News.ViewModel;
-using HarmanPOC.Helper;
 
 namespace Components.Component.News
 {
     public class NewsManager : ComponentsManager
     {
-        public NewsManager()
+        public NewsManager(NewsViewModel newsViewModel)
         {
-            viewModel = new NewsViewModel(this);
+            viewModel = newsViewModel;
             CurrentView = new NewsView {BindingContext = viewModel};
         }
 

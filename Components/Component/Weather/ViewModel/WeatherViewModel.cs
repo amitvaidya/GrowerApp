@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Components.Component.Helper;
 using Components.Component.Weather.Model;
 using Components.Component.Weather.View;
-using HarmanPOC.Helper;
 using Xamarin.Forms;
 
 namespace Components.Component.Weather.ViewModel
@@ -44,7 +43,7 @@ namespace Components.Component.Weather.ViewModel
 
         private void HandleMessage()
         {
-            MessagingCenter.Subscribe<string>(this, AppConstants.NextCommand, async (sender) =>
+            MessagingCenter.Subscribe<string>(this, Constants.NextCommand, async (sender) =>
             {
                 IsBusy = true;
                 await Task.Delay(100);
@@ -53,15 +52,15 @@ namespace Components.Component.Weather.ViewModel
                 //    IsBusy = false;
                 //    return;
                 //}
-                if (sender.Equals(AppConstants.NextCommand))
+                if (sender.Equals(Constants.NextCommand))
                 {
                     _counter++;
                     var template = new CustomDataTemplate(new WeatherDetailViewModel(), 
                         new DataTemplate(typeof(WeatherPagedView)));
                     (manager as WeatherManager).UpdateView(template);
-                    MessagingCenter.Unsubscribe<string>(this, AppConstants.NextCommand);
+                    MessagingCenter.Unsubscribe<string>(this, Constants.NextCommand);
                 }
-                else if (sender.Equals(AppConstants.PreviousCommand))
+                else if (sender.Equals(Constants.PreviousCommand))
                 {
                     _counter--;
                 }

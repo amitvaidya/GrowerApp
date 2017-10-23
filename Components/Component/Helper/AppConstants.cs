@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HarmanPOC.Helper
+﻿namespace Components.Component.Helper
 {
-    public class AppConstants
+    public class Constants
     {
         /* Message Name Constant  */
         public static readonly string NextCommand = "NextCommand";

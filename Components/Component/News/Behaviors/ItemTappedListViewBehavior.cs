@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Components.Component.News.Behaviors
 {
-
     internal sealed class ItemTappedListViewBehavior
     {
         public static readonly BindableProperty ItemTappedCommandProperty =
@@ -20,7 +14,6 @@ namespace Components.Component.News.Behaviors
                 BindingMode.OneWay,
                 null,
                 PropertyChanged);
-
 
         private static void PropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
